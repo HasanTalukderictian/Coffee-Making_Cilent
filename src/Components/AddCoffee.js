@@ -2,6 +2,7 @@ import React from 'react';
 import '../App.css';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
+import Swal from 'sweetalert2'
 
 const AddCoffee = () => {
 
@@ -17,15 +18,32 @@ const AddCoffee = () => {
         const details = form.details.value;
         const photo = form.photoURL.value;
 
-        const  user  = {name,quantity,supplier,taste,category,details,photo};
-        console.log(user);
+        const  newCoffee  = {name,quantity,supplier,taste,category,details,photo};
+        console.log(newCoffee);
+
+
+        ///send data to the server 
+        fetch(`http://localhost:5000/coffee`, {
+            method:'POST',
+            headers:{
+                'content-type':'application/json'
+            },
+            body:JSON.stringify(newCoffee)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if(data.insertedId){
+                Swal.fire({
+                    title: 'Success!!',
+                    text: 'User Added Successfully',
+                    icon: 'success',
+                    confirmButtonText: 'Cool'
+                  })
+            }
+        })
 
     }
-
-
-    
-
-
 
     return (
         <div className='App'>
