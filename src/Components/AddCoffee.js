@@ -19,6 +19,7 @@ const AddCoffee = () => {
         const photo = form.photoURL.value;
 
         const  newCoffee  = {name,quantity,supplier,taste,category,details,photo};
+        
         console.log(newCoffee);
 
 
