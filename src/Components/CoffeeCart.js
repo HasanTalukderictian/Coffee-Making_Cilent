@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-const CoffeeCart = ({ coffee }) => {
-    const { _id, name, quantity, supplier, taste, category, details, photo } = coffee;
-    const handledelete = _id =>{
+const CoffeeCart = ({ coffee,setCoffees, coffees }) => {
+    const { _id, name, quantity,  taste, category,  photo } = coffee;
+    const handleDelete = _id =>{
            console.log(_id);
            Swal.fire({
             title: 'Are you sure?',
@@ -31,6 +31,9 @@ const CoffeeCart = ({ coffee }) => {
                       )
                 }
              })
+
+             const reaming  = coffees.filter(cof =>cof._id !== _id)
+             setCoffees(reaming);
 
 
               
@@ -60,7 +63,7 @@ const CoffeeCart = ({ coffee }) => {
                         <button className="btn">Edit</button>
                         </Link>
                         <button
-                        onClick={()=> handledelete(_id)}
+                        onClick={()=> handleDelete(_id)}
                          className="btn bg-orange-500"
                          >Delete</button>
                     </div>
